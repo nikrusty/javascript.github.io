@@ -27,7 +27,7 @@
         </nav>
     </header>
     <section id="pageForm">
-        <form action="#">
+        <form action="#" onsubmit="return saveInput()">
             <label for="recipientName">Recipient name:</label>
             <input type="text" name="recipientName" placeholder="Enter your Recipient Name" />
 
@@ -47,7 +47,7 @@
             </label>
             <input type="text" name="hostName" placeholder="Host Name" />
 
-            <input type="submit" value="Submit" onclick="saveInput()">
+            <input type="submit" value="Submit"/>
         </form>
     </section>
 
@@ -55,7 +55,7 @@
     <article id="placeholderContent">
         Hello <span id="recipientName">recipientName</span>!
         <br/>
-        <br/> You have been invited to volunteer for an event held by <span id="organizationName">organizationName</span> on <span id="eventDate">eventDate</span>. Please come to the following website: <span id="websiteURL">websiteURL</span> to sign up as a volunteer.
+        <br/> You have been invited to volunteer for an event held by <span id="organizationName"></span> on <span id="eventDate">eventDate</span>. Please come to the following website: <span id="websiteURL">websiteURL</span> to sign up as a volunteer.
         <br/>
         <br/> Thanks!
         <br/>
