@@ -1,32 +1,14 @@
 /*eslint-env browser*/
-//window.addEventListener('Submit', saveInput, false);
 window.addEventListener('keyup', addFields);
-
+window.onload = preloadImages;
 var invitations = new Array();
 var n;
 var i;
 
-/* function to take values on submit and assign
-to placeholders below form
-returning false to ensure values dont get consumed and overwritten */
-//function saveInput() {
-//
-////Variables that hold values on submit of form
-//var orgName = document.getElementsByName("organizationName")[0].value;
-//var date = document.getElementsByName("eventDate")[0].value;
-//var website = document.getElementsByName("websiteURL")[0].value;
-//var host = document.getElementsByName("hostName")[0].value;
-//var recipient = document.getElementsByName("recipientName")[0].value;
-//
-////Reassigning of span id's to variable values from above
-//document.getElementById("recipientName").textContent = recipient;
-//document.getElementById("organizationName").textContent = orgName;
-//document.getElementById("eventDate").textContent = date;
-//document.getElementById("websiteURL").textContent = website;
-//document.getElementById("hostName").textContent = host;
-//
-//return false;
-//}
+//Banner variables
+var cycle = 0;
+var preload = new Array("images/banner1.jpg", "images/banner2.jpg", "images/banner3.jpg");
+
 //Function to obtain how many fields to create for the invitations
 function addFields(){
     document.getElementById("recipientNumber").onkeypress = function(e) { 
@@ -85,4 +67,17 @@ function showInvitations() {
     display +=  "<br><br><span id=\"hostName\">"+single.host+"</span><br><br>===============================<br><br>";    
     }
     document.getElementById("placeholderContent").innerHTML = display;
+}
+function setupRollover(n) {
+    n.outImage = new Image();
+    
+}
+//Function to preload banner images and cycle through
+function preloadImages() {
+    cycle++;
+    if(cycle == preload.length) {
+        cycle = 0;
+    }
+    document.getElementById("banner").src = preload[cycle];
+    setTimeout(preloadImages, 3 * 1000);
 }
