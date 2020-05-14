@@ -1,6 +1,8 @@
 /*eslint-env browser*/
 window.addEventListener('keyup', addFields);
 window.onload = preloadImages;
+
+//Global Variables
 var invitations = new Array();
 var n;
 var i;
@@ -8,6 +10,7 @@ var i;
 //Banner variables
 var cycle = 0;
 var preload = new Array("images/banner1.jpg", "images/banner2.jpg", "images/banner3.jpg");
+
 
 //Function to obtain how many fields to create for the invitations
 function addFields(){
@@ -68,16 +71,25 @@ function showInvitations() {
     }
     document.getElementById("placeholderContent").innerHTML = display;
 }
-function setupRollover(n) {
-    n.outImage = new Image();
-    
-}
 //Function to preload banner images and cycle through
 function preloadImages() {
+    //Increase counter to go to next image
     cycle++;
+    //If counter is at last image, start over
     if(cycle == preload.length) {
         cycle = 0;
     }
+    //Change Banner to next image in array
     document.getElementById("banner").src = preload[cycle];
     setTimeout(preloadImages, 3 * 1000);
+}
+//When mouse rolls over image, image will change to smaller version
+function rollover(x) {
+    x.style.height = "100px";
+    x.style.width = "150px";
+}
+//when mouse rolls off image, image will default to original
+function rollout(x) {
+    x.style.height = "200px";
+    x.style.width = "300px";
 }
