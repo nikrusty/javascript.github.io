@@ -4,6 +4,7 @@
 <head>
     <title>Invitation Page</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript" src="js/functions.js"></script>
 </head>
 
 <body>
@@ -26,31 +27,31 @@
         </nav>
     </header>
     <section id="pageForm">
-        <form action="#">
+        <form action="#" name="registrationForm" onsubmit="return validateForm()">
             <label for="userName">Username:</label>
-            <input type="text" name="userName" placeholder="Enter your Username" />
+            <input type="text" name="userName" id="userName" placeholder="Enter your Username" required/>
 
             <label for="Password">Password:
             </label>
-            <input type="password" name="password" placeholder="Enter your Password" />
+            <input type="password" name="password" id="password" placeholder="Enter your Password" required/>
 
             <label for="passwordVerify">Verify your Password:
             </label>
-            <input type="password" name="passwordVerify" placeholder="Enter in your Password again" />
+            <input type="password" name="passwordVerify" id="passwordVerify" placeholder="Enter in your Password again" required/>
 
             <label for="firstName">First Name:
             </label>
-            <input type="text" name="firstName" placeholder="Enter your First Name" />
+            <input type="text" name="firstName" id="firstName" placeholder="Enter your First Name" required/>
 
-            <label for="hostName">Last Name:
+            <label for="lastName">Last Name:
             </label>
-            <input type="text" name="lastName" placeholder="Enter your Last Name" />
+            <input type="text" name="lastName" id="lastName" placeholder="Enter your Last Name" required/>
             <label for="email">Email:
             </label>
-            <input type="text" name="email" placeholder="Enter your Email Address" />
+            <input type="text" name="email" id="email" placeholder="Enter your Email Address" />
 			<label for="phoneNumber">Phone Number
             </label>
-            <input type="text" name="lastName" placeholder="Enter your Phone Number" />
+            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Enter your Phone Number" />
 			<label for="signUpNewsletter">Sign up for newsletter:
             </label>
 			  <input type="radio" name="signUpNewsletter" value="Yes" checked> Yes 
