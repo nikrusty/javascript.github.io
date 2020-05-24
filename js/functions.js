@@ -95,7 +95,7 @@ function rollout(x) {
 }
 //Function to validate input from form
 function validateForm() {
-    var letter = /^[a-zA-Z]/;
+    var letter = /^[A-Za-z]+$/;
     var letters = /^[0-9a-zA-Z]+$/;
     var numberFormat = /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
     var emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
