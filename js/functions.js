@@ -85,11 +85,64 @@ function preloadImages() {
 }
 //When mouse rolls over image, image will change to smaller version
 function rollover(x) {
-    x.style.height = "100px";
-    x.style.width = "150px";
+    x.style.color = "red";
+
 }
 //when mouse rolls off image, image will default to original
 function rollout(x) {
     x.style.height = "200px";
     x.style.width = "300px";
+}
+//Function to validate input from form
+function validateForm() {
+    var letter = /^[a-zA-Z]/;
+    var letters = /^[0-9a-zA-Z]+$/;
+    var numberFormat = /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/;
+    var emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var username = document.forms["registrationForm"]["userName"].value;
+    var password = document.forms["registrationForm"]["password"].value;
+    var passwordVerify = document.forms["registrationForm"]["passwordVerify"].value;
+    var first = document.forms["registrationForm"]["firstName"].value;
+    var last = document.forms["registrationForm"]["lastName"].value;
+    var email = document.forms["registrationForm"]["email"].value;
+    var number = document.forms["registrationForm"]["phoneNumber"].value;
+
+    //Username validation to ensure only letters and numbers are used
+    if(!username.match(letters)) {
+        alert("Please use only numbers or letters");
+        document.getElementById("userName").focus();
+        return false;
+    }
+    //Validation to check password length
+    if(password.length < 8) {
+        alert("Password must be minimum of 8 characters");
+        document.getElementById("password").focus();
+        return false;
+    }
+    if(passwordVerify.length != password.length || passwordVerify.length < 8 || passwordVerify != password) {
+        alert("Verify Password is not long enough or does not match password");
+        document.getElementById("passwordVerify").focus();
+        return false;
+    }
+    if(!first.match(letter)) {
+        alert("First name can only contain letters");
+        document.getElementById("firstName").focus();
+        return false;
+    }
+    if(!last.match(letter)) {
+        alert("Last name can only contain letters");
+        document.getElementById("lastName").focus();
+        return false;
+    }
+    if(!email.match(emailFormat)) {
+        alert("Email format must be xxx@xxx.xxx format");
+        document.getElementById("email").focus();
+        return false;
+    }
+    if(!number.match(numberFormat)) {
+        alert("Phone Number must match (xxx) xxx-xxxx format");
+        document.getElementById("phoneNumber").focus();
+        return false;
+    }
+    return true;
 }
