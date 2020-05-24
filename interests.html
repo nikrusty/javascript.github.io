@@ -4,6 +4,7 @@
 <head>
     <title>Interests Page</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript" src="js/functions.js"></script>
 </head>
 
 <body>
@@ -26,8 +27,26 @@
         </nav>
     </header>
     <section id="pageForm">
-        <form action="#">
-			
+        <form action="confirm.html" name="interestForm" onsubmit="return interestForm()">
+            <label for="Interests">Interests:</label>
+            <input type="checkbox" id="checkSports" value="sports"/>
+            <label for="checkSports">Sports</label>
+            <input type="checkbox" id="checkComics" value="comics"/>
+            <label for="checkComics">Comics</label>
+            <input type="checkbox" id="checkMovies" value="movies"/>
+            <label for="checkMovies">Movies</label><br><br>
+            
+            <label for="newsletter">Sign up for newsletter:
+            </label>
+			  <input type="radio" name="newsletter" value="Yes" checked> Yes 
+				<input type="radio" name="newsletter" value="No"> No
+            <br><br>
+            <label for="comments">Comments</label>
+            <textarea id="comments" rows="6" cols="50">Enter any additional comments here.
+            </textarea>
+            <br><br>
+            <label for="referral">Referred By:</label>
+            <input type="text" id="referral" name="referral" placeholder="Person who referred you">
             <!--
 			Include other form fields here
 			

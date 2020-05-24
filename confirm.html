@@ -4,9 +4,10 @@
 <head>
     <title>Interests Page</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript" src="js/functions.js"></script>
 </head>
 
-<body>
+<body onload="startCookies()">
     <header>
         <div class="top">
             <a class="logo" href="index.html">CapellaVolunteers<span class="dotcom">.org</span></a>
@@ -26,13 +27,29 @@
         </nav>
     </header>
     <section id="pageFormContent">
+        <div>Username:
+        <span id="username"></span>
+        </div>
 
-            <!--
-			Process content to display content on screen
-			
-			-->
-            
+        <div>Password:
+        <span id="password"></span>
+        </div>
 
+        <div>First Name:
+        <span id="first"></span>
+        </div>
+
+        <div>Last Name:
+        <span id="last"></span>
+        </div>
+
+        <div>Email:
+        <span id="email"></span>
+        </div>
+
+        <div>Phone Number:
+        <span id="number"></span>
+        </div>
     </section>
 
     <footer>This events site is for IT-FP3215 tasks.
