@@ -2,6 +2,8 @@
 window.addEventListener('keyup', addFields);
 window.onload = preloadImages;
 
+
+
 //Global Variables
 var invitations = new Array();
 var n;
@@ -144,53 +146,45 @@ function validateForm() {
         document.getElementById("phoneNumber").focus();
         return false;
     }
-    setCookie("username", username, 1);
-    setCookie("password", password, 1);
-    setCookie("first", first, 1);
-    setCookie("last", last, 1);
-    setCookie("email", email, 1);
-    setCookie("number", number, 1);
+    setCookie("username", username);
+    setCookie("password", password);
+    setCookie("first", first);
+    setCookie("last", last);
+    setCookie("email", email);
+    setCookie("number", number);
     
     return true;
 }
 //Function to set cookie
-function setCookie(cookieName, cookieValue, expiration) {
+function setCookie(cookieName, cookieValue) {
+    var today = new Date();
+    var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000);
 
-var d = new Date();
-
-d.setTime(d.getTime() + (expiration * 24 * 60 * 60 * 1000));
-
-var expires = "expires=" + d.toUTCString();
-
-document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
-
-}
-//Function to save from interest page
-function interestForm() {
-    return false;
+    document.cookie = cookieName + "=" + escape(cookieValue) + "; path=/; expires=" + expiry.toGMTString();
 }
 //function to get data from cookie once on confirmation page
 function getCookies(cookieName) {
     var cook = cookieName + "=";
     var decodeCookie = decodeURIComponent(document.cookie);
-    var split = decodeCookie.split(';');
+    var split = decodeCookie.split(";");
     for(var i = 0; i < split.length; i++) {
         var x = split[i];
-        while(x.charAt(0) == ''){
+        while(x.charAt(0) == ""){
             x = x.substring(1);
         }
         if(x.indexOf(cook) == 0) {
             return x.substring(cook.length, x.length);
         }
     }
-    return "";
+    return "fake";
 }
 //Function to trigger getCookies call
 function startCookies() {
-    document.getElementById("username").innerHTML = getCookies("username");
-    document.getElementById("password").innerHTML = getCookies("password");
-    document.getElementById("first").innerHTML = getCookies("first");
-    document.getElementById("last").innerHTML = getCookies("last");
-    document.getElementById("email").innerHTML = getCookies("email");
-    document.getElementById("number").innerHTML = getCookies("number");
+    document.getElementById("username").textContent = getCookies("username");
+    document.getElementById("password").textContent = getCookies("password");
+
+    document.getElementById("first").textContent = getCookies("first");
+    document.getElementById("last").textContent = getCookies("last");
+    document.getElementById("email").textContent = getCookies("email");
+    document.getElementById("number").textContent = getCookies("number");
 }
