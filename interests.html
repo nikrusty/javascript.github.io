@@ -7,7 +7,7 @@
     <script type="text/javascript" src="js/functions.js"></script>
 </head>
 
-<body>
+<body onload="importData()">
     <header>
         <div class="top">
             <a class="logo" href="index.html">CapellaVolunteers<span class="dotcom">.org</span></a>
@@ -27,22 +27,22 @@
         </nav>
     </header>
     <section id="pageForm">
-        <form action="confirm.html" name="interestForm" onsubmit="return interestForm()">
+        <form name="registrationForm" onsubmit="return saveCookies()">
             <label for="Interests">Interests:</label>
-            <input type="checkbox" id="checkSports" value="sports"/>
+            <input type="checkbox" id="checkSports" name="interest" value="sports"/>
             <label for="checkSports">Sports</label>
-            <input type="checkbox" id="checkComics" value="comics"/>
+            <input type="checkbox" id="checkComics" name="interest" value="comics"/>
             <label for="checkComics">Comics</label>
-            <input type="checkbox" id="checkMovies" value="movies"/>
+            <input type="checkbox" id="checkMovies" name="interest" value="movies"/>
             <label for="checkMovies">Movies</label><br><br>
             
             <label for="newsletter">Sign up for newsletter:
             </label>
-			  <input type="radio" name="newsletter" value="Yes" checked> Yes 
-				<input type="radio" name="newsletter" value="No"> No
+			 <input type="radio" id="newsletterYes" name="newsletterYes" value="Yes"/> Yes 
+                <input type="radio" id="newsletterNo" name="newsletterNo" value="No"/> No
             <br><br>
             <label for="comments">Comments</label>
-            <textarea id="comments" rows="6" cols="50">Enter any additional comments here.
+            <textarea id="comments" name="comments" rows="6" cols="50" placeholder="Enter any additional comments here.">
             </textarea>
             <br><br>
             <label for="referral">Referred By:</label>
@@ -51,15 +51,14 @@
 			Include other form fields here
 			
 			-->
-            <input type="hidden" name="userName"/>
-            <input type="hidden" name="password"/>
-            <input type="hidden" name="passwordVerify" />
-            <input type="hidden" name="firstName" />
-            <input type="hidden" name="lastName" />
-            <input type="hidden" name="email"/>
-            <input type="hidden" name="lastName" />
-			<input type="hidden" name="signUpNewsletter"/ >
-			
+            <input type="hidden" id="userName" name="userName"/>
+            <input type="hidden" name="password" id="password"/>
+            <input type="hidden" id="passwordVerify" name="passwordVerify" />
+            <input type="hidden" id="firstName" name="firstName" />
+            <input type="hidden" id="lastName" name="lastName" />
+            <input type="hidden" id="email" name="email"/>
+            <input type="hidden" id="phoneNumber" name="phoneNumber" />
+			<input type="hidden" id="signUpNewsletter" name="signUpNewsletter"/ >
             <input type="submit" value="Register">
         </form>
     </section>
