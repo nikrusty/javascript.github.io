@@ -146,45 +146,136 @@ function validateForm() {
         document.getElementById("phoneNumber").focus();
         return false;
     }
-    setCookie("username", username);
-    setCookie("password", password);
-    setCookie("first", first);
-    setCookie("last", last);
-    setCookie("email", email);
-    setCookie("number", number);
+    window.location.href = "interests.html"+"?Username="+document.registrationForm.userName.value +
+        "&First="+document.registrationForm.firstName.value +
+        "&Last="+document.registrationForm.lastName.value +
+        "&Password="+document.registrationForm.password.value +
+        "&Email="+document.registrationForm.email.value +
+        "&Number="+document.registrationForm.phoneNumber.value +
+        "&SignUp="+document.registrationForm.signUpNewsletter.value;
     
-    return true;
+    return false;
 }
 //Function to set cookie
-function setCookie(cookieName, cookieValue) {
-    var today = new Date();
-    var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000);
+function setCookie(cookieName, cookieValue, time) {
+    var expires = "";
 
-    document.cookie = cookieName + "=" + escape(cookieValue) + "; path=/; expires=" + expiry.toGMTString();
+    if (time) {
+        var date = new Date();
+        date.setTime(date.getTime() + (time*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+
+    document.cookie = cookieName + "=" + cookieValue + expires + "; path=/";
 }
+
 //function to get data from cookie once on confirmation page
 function getCookies(cookieName) {
-    var cook = cookieName + "=";
-    var decodeCookie = decodeURIComponent(document.cookie);
-    var split = decodeCookie.split(";");
-    for(var i = 0; i < split.length; i++) {
-        var x = split[i];
-        while(x.charAt(0) == ""){
-            x = x.substring(1);
+    var name = cookieName + "=";
+    var ca = document.cookie.split(';');
+
+    for(var i=0;i < ca.length;i++) {
+
+        var c = ca[i];
+
+        while (c.charAt(0)==' ') {
+            c = c.substring(1,c.length);
         }
-        if(x.indexOf(cook) == 0) {
-            return x.substring(cook.length, x.length);
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
         }
     }
-    return "fake";
-}
-//Function to trigger getCookies call
-function startCookies() {
-    document.getElementById("username").textContent = getCookies("username");
-    document.getElementById("password").textContent = getCookies("password");
 
-    document.getElementById("first").textContent = getCookies("first");
-    document.getElementById("last").textContent = getCookies("last");
-    document.getElementById("email").textContent = getCookies("email");
-    document.getElementById("number").textContent = getCookies("number");
+    return "what";
+}
+//function to import data into Interests.html
+function importData() {
+    var username = getQuerystring('Username');
+    var first = getQuerystring('First');
+    var last = getQuerystring('Last');
+    var password = getQuerystring('Password');
+    var email = getQuerystring('Email');
+    var number = getQuerystring('Number');
+    var signUp = getQuerystring('SignUp');
+    if(signUp == "Yes")
+    {
+        document.getElementById('newsletterYes').checked = true;
+    }
+    else
+    {
+        document.getElementById('newsletterNo').checked = true;
+    }
+    document.registrationForm.userName.value = username;
+    document.registrationForm.firstName.value = first;
+    document.registrationForm.lastName.value = last;
+    document.registrationForm.password.value = password;
+    document.registrationForm.email.value = email;
+    document.registrationForm.phoneNumber.value = number;
+    document.registrationForm.signUpNewsletter.value = signUp;
+}
+//function to start importing data into Confirm.html
+function getData() {
+    
+    var data = getCookies("cookie1");
+    var obj = {};
+
+    if (data) {
+        var regSplitStr = data.split(",");
+    
+        for (var i = 0; i < regSplitStr.length; ++i) {
+
+            var tmp = regSplitStr[i].split("=");
+            obj[tmp[0]] = tmp[1];
+        }
+        document.getElementById("username").textContent = obj.username;
+        document.getElementById("first").textContent = obj.first;
+        document.getElementById("last").textContent = obj.last;
+        document.getElementById("password").textContent = obj.password;
+        document.getElementById("email").textContent = obj.email;
+        document.getElementById("number").textContent = obj.number;
+        document.getElementById("signUp").textContent = obj.signUp;
+        document.getElementById("interest").textContent = obj.interest;
+        document.getElementById("comments").textContent = obj.comments;
+        document.getElementById("referral").textContent = obj.referral;
+    }
+}
+//function to retrieve data via query string
+function getQuerystring(name, url) {
+    if (!url){
+        url = window.location.href;
+    } 
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results){
+       return null; 
+    } 
+    if (!results[2]) {
+        return '';
+    } 
+    return results[2];
+
+}
+//Function to save and store cookies through page redirects
+function saveCookies() {
+    var savedCookies = 
+        {
+            username:document.registrationForm.userName.value,
+            first: document.registrationForm.firstName.value,
+            last: document.registrationForm.lastName.value,
+            password: document.registrationForm.password.value,
+            email: document.registrationForm.email.value,
+            number:document.registrationForm.phoneNumber.value,
+            signUp: document.registrationForm.signUpNewsletter.value,
+            interest: document.registrationForm.interest.value,
+            comments: document.registrationForm.comments.value,
+            referral: document.registrationForm.referral.value, 
+        };
+    var data = "username=" + savedCookies.username + ",first=" + savedCookies.first + ",last=" + savedCookies.last + ",password=" + savedCookies.password +",email=" + savedCookies.email + ",number=" + savedCookies.number + ",signUp=" + savedCookies.signUp + ",interest=" + savedCookies.interest + "" +",comments=" + savedCookies.comments + ",referral=" + savedCookies.referral + "";
+    
+    setCookie("cookie1", data, 1);
+    window.location.href = "confirm.html"
+
+    return false;
+
 }
